@@ -82,8 +82,7 @@ const restaurantList=[
     },
 ];
 
-const RestaurantCard=({restaurant})=>{
-    const {name, cuisines, avgRating, cloudinaryImageId}=restaurant;
+const RestaurantCard=({name, cuisines, avgRating, cloudinaryImageId})=>{
     return(
         <div className="card">
             <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+cloudinaryImageId} alt="restaurant" />
@@ -99,12 +98,11 @@ const RestaurantCard=({restaurant})=>{
 const Body=(props)=>{
     return(
         <div className="body">
-            <RestaurantCard restaurant={restaurantList[0].data}/>
-            <RestaurantCard restaurant={restaurantList[1].data}/>
-            <RestaurantCard restaurant={restaurantList[2].data}/>
-            <RestaurantCard restaurant={restaurantList[3].data}/>
-            <RestaurantCard restaurant={restaurantList[4].data}/>
-            <RestaurantCard restaurant={restaurantList[5].data}/>
+            {
+                restaurantList.map((restaurant)=>{
+                    return <RestaurantCard key={restaurant.data.name} {...restaurant.data}/>
+                })
+            }
         </div>
     )
 }
