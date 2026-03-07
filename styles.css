@@ -42,3 +42,30 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.search{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-input{
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-btn{
+    padding: 10px 20px;
+    border: none;
+    background-color: #267919;
+    color: #fff;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.search-btn:hover{
+    background-color: #1b5613;
+}
