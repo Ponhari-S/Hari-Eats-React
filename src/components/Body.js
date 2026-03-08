@@ -1,19 +1,29 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurantList } from "../config";
+import { useState } from "react";
+
+const filterData=(searchText, restaurants)=>{
+    return restaurants.filter((restaurant)=>{
+        return restaurant.data.name.toLowerCase().includes(searchText.toLowerCase());
+    })
+}
 
 const Body=()=>{
-    let searchText="";
+    const [searchText, setSearchText] = useState("");
+    const [restaurants, setRestaurants] = useState(restaurantList);
     return(
         <>
         <div className="search">
             <input type="text" className="search-input" placeholder="Search for restaurants and food" value={searchText} onChange={(e)=>{
-                searchText=e.target.value;
+                setSearchText(e.target.value);
             }} />
-            <button className="search-btn">Search</button>
+            <button className="search-btn" onClick={()=>{
+                setRestaurants(filterData(searchText, restaurants))
+                }}>Search</button>
         </div>
         <div className="body">
             {
-                restaurantList.map((restaurant)=>{
+                restaurants.map((restaurant)=>{
                     return <RestaurantCard key={restaurant.data.name} {...restaurant.data}/>
                 })
             }
