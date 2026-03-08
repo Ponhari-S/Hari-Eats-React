@@ -11,6 +11,7 @@ const filterData=(searchText, restaurants)=>{
 const Body=()=>{
     const [searchText, setSearchText] = useState("");
     const [restaurants, setRestaurants] = useState(restaurantList);
+    const [allRestaurants] = useState(restaurantList);
     return(
         <>
         <div className="search">
@@ -18,7 +19,7 @@ const Body=()=>{
                 setSearchText(e.target.value);
             }} />
             <button className="search-btn" onClick={()=>{
-                setRestaurants(filterData(searchText, restaurants))
+                setRestaurants(filterData(searchText, allRestaurants))
                 }}>Search</button>
         </div>
         <div className="body">
