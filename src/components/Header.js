@@ -10,6 +10,7 @@ const Header=()=>{
     return(
         <div className="header">
             <Title />
+            <h1>Hari Eats</h1>
             <div className="nav-items">
                 <ul>
                     <li>Home</li>

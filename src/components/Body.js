@@ -1,18 +1,31 @@
 import RestaurantCard from "./RestaurantCard";
-import { restaurantList } from "../config";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import Shimmer from "./Shimmer";
+import { FETCH_MENU_URL } from "../config";
 
 const filterData=(searchText, restaurants)=>{
     return restaurants.filter((restaurant)=>{
-        return restaurant.data.name.toLowerCase().includes(searchText.toLowerCase());
+        return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());
     })
 }
 
 const Body=()=>{
     const [searchText, setSearchText] = useState("");
-    const [restaurants, setRestaurants] = useState(restaurantList);
-    const [allRestaurants] = useState(restaurantList);
-    return(
+    const [restaurants, setRestaurants] = useState([]);
+    const [allRestaurants,setAllrestaurants] = useState([]);
+
+useEffect(()=>{
+    getRestaurants();
+},[])
+
+async function getRestaurants(){
+    const data = await fetch(FETCH_MENU_URL);
+    const json = await data.json();
+    setAllrestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+}
+
+return (allRestaurants.length === 0) ? <Shimmer/> : (
         <>
         <div className="search">
             <input type="text" className="search-input" placeholder="Search for restaurants and food" value={searchText} onChange={(e)=>{
@@ -25,7 +38,7 @@ const Body=()=>{
         <div className="body">
             {
                 restaurants.map((restaurant)=>{
-                    return <RestaurantCard key={restaurant.data.name} {...restaurant.data}/>
+                    return <RestaurantCard key={restaurant.info.id} {...restaurant.info}/>
                 })
             }
         </div>
