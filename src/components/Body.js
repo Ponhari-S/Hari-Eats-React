@@ -37,7 +37,9 @@ return (allRestaurants.length === 0) ? <Shimmer/> : (
         </div>
         <div className="body">
             {
+                restaurants.length === 0 ? <h1>No restaurant found</h1> :
                 restaurants.map((restaurant)=>{
+                    if(restaurant.length === 0) return <h1>No restaurant found</h1>
                     return <RestaurantCard key={restaurant.info.id} {...restaurant.info}/>
                 })
             }
