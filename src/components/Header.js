@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router"
 
 const Title=()=>{
     return(
@@ -21,9 +22,9 @@ const Header=()=>{
             <Title />
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="./About">About Us</Link></li>
+                    <li><Link to="./Contact">Contact Us</Link></li>
                     <li>Cart</li>
                 </ul>
             </div>

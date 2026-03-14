@@ -1,6 +1,8 @@
 const About =()=>{
     return(
-        <div>About Us</div>
+        <div>
+            <h1>About Us !</h1>
+        </div>
     )
 }
 
