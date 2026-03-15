@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { FETCH_MENU_URL } from "../config";
+import { Link } from "react-router-dom";
 
 const filterData=(searchText, restaurants)=>{
     return restaurants.filter((restaurant)=>{
@@ -38,9 +39,9 @@ return (allRestaurants.length === 0) ? <Shimmer/> : (
         <div className="body">
             {
                 restaurants.length === 0 ? <h1>No restaurant found</h1> :
-                restaurants.map((restaurant)=>{
+                restaurants.map((restaurant,index)=>{
                     if(restaurant.length === 0) return <h1>No restaurant found</h1>
-                    return <RestaurantCard key={restaurant.info.id} {...restaurant.info}/>
+                    return <Link to={`./restaurant/${101 + (index % 8)}`} key={restaurant.info.id}><RestaurantCard key={restaurant.info.id} {...restaurant.info}/></Link>
                 })
             }
         </div>

@@ -1,42 +1,67 @@
 import { useEffect,useState } from "react";
 import { mockMenuData } from "./MockMenu";
-//import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
+import Shimmer from "./Shimmer";
 
-const RestaurantMenu =()=>{
+/*   async function getRestaurantInfo(){
+        const data=await fetch("https://api.allorigins.win/raw?url=https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.9192242&lng=78.1105657&restaurantId="+id);
+        const json=await data.json();
+        if (!json?.data) return;
+        const info = json?.data?.cards
+            ?.map((card) => card?.card?.card)
+            ?.find((card) => card?.info)
+            ?.info;
+        setRestaurantInfo(info);
+        const items = json?.data?.cards
+            ?.find((x) => x.groupedCard)
+            ?.groupedCard?.cardGroupMap?.REGULAR?.cards
+            ?.find((c) => c?.card?.card?.itemCards)
+            ?.card?.card?.itemCards;
 
-    //const { id }=useParams();
+        setMenuItems(items || []);
+    }
+*/
+const RestaurantMenu = () => {
 
-    
-    const[restaurantInfo,setRestaurantInfo]=useState({});
+    const { id } = useParams();
+  
+    const [restaurantInfo, setRestaurantInfo] = useState(null);
+    const [menuItems, setMenuItems] = useState([]);
+  
+    useEffect(() => {
+  
+      const restaurant = mockMenuData.restaurants.find(
+        (res) => res.id === id
+      );
+  
+      if (restaurant) {
+        setRestaurantInfo(restaurant);
+        setMenuItems(restaurant.menu);
+      }
+  
+    }, [id]);
 
-//    async function getRestaurantInfo(){
-//        const data=await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.9192242&lng=78.1105657&restaurantId=559820&catalog_qa=undefined&submitAction=ENTER");
-//        const json=await data.json();
-//        console.log(json.data.cards);
-//        setRestaurantInfo(json?.data?.cards
-//            ?.map((card) => card?.card?.card)
-//            ?.find((card) => card?.info)
-//            ?.info);
-//    }
+    if (!restaurantInfo) return <Shimmer />;
 
-    useEffect(()=>{
-        setRestaurantInfo(mockMenuData);
-    },[]);
+  return (
+    <div className="menu-container">
 
-    return(
-        <div className="menu-container">
-            <h1>{restaurantInfo?.name}</h1>
-            <h3>{restaurantInfo?.cuisines?.join(", ")}</h3>
-            <p>{restaurantInfo?.costForTwoMessage}</p>
-            <ul>
-                {restaurantInfo?.itemCards?.map((item) => (
-                    <li key={item.card.info.id}>
-                        {item.card.info.name} - ₹{item.card.info.price / 100}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
+      <h1>{restaurantInfo.name}</h1>
+
+      <h3>{restaurantInfo.cuisines.join(", ")}</h3>
+
+      <p>{restaurantInfo.costForTwoMessage}</p>
+
+      <ul>
+        {menuItems.map((item) => (
+          <li key={item.id}>
+            {item.name} - ₹{item.price}
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  );
 }
 
 export default RestaurantMenu;
