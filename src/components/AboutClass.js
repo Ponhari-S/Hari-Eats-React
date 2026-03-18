@@ -6,7 +6,17 @@ class AboutClass extends React.Component{
         super(props);
     }
     async componentDidMount(){
+        this.timer = setInterval(() => {
+            console.log("Timer");
+        }, 1000);
         console.log("Component Did Mount");
+    }
+    componentDidUpdate(){
+        console.log("Component Did Update");
+    }
+    componentWillUnmount(){
+        clearInterval(this.timer);
+        console.log("Component Will Unmount");
     }
     render(){
         return(
