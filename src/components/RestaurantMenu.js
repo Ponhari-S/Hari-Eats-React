@@ -1,7 +1,7 @@
-import { useEffect,useState } from "react";
-import { mockMenuData } from "./MockMenu";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import useRest from "../utils/useRest";
+import useRestMenu from "../utils/useRestMenu";
 
 /*   async function getRestaurantInfo(){
         const data=await fetch("https://api.allorigins.win/raw?url=https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.9192242&lng=78.1105657&restaurantId="+id);
@@ -25,21 +25,8 @@ const RestaurantMenu = () => {
 
     const { id } = useParams();
   
-    const [restaurantInfo, setRestaurantInfo] = useState(null);
-    const [menuItems, setMenuItems] = useState([]);
-  
-    useEffect(() => {
-  
-      const restaurant = mockMenuData.restaurants.find(
-        (res) => res.id === id
-      );
-  
-      if (restaurant) {
-        setRestaurantInfo(restaurant);
-        setMenuItems(restaurant.menu);
-      }
-  
-    }, [id]);
+    const restaurantInfo = useRest(id);
+    const menuItems = useRestMenu(id);
 
     if (!restaurantInfo) return <Shimmer />;
 

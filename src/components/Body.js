@@ -3,12 +3,7 @@ import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { FETCH_MENU_URL } from "../config";
 import { Link } from "react-router-dom";
-
-const filterData=(searchText, restaurants)=>{
-    return restaurants.filter((restaurant)=>{
-        return restaurant.info.name.toLowerCase().includes(searchText.toLowerCase());
-    })
-}
+import { filterData } from "../utils/helper";
 
 const Body=()=>{
     const [searchText, setSearchText] = useState("");
