@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
+import useAuth from "../utils/useAuth";
 
 const Title=()=>{
     return(
@@ -9,13 +10,9 @@ const Title=()=>{
     )
 }
 
-const LogedInUser=()=>{
-    return(false);
-}
-
 const Header=()=>{
 
-    const [isLoggedIn, setIsLoggedIn] = useState(LogedInUser());
+    const { isLoggedIn,setIsLoggedIn, login, logout } = useAuth();
 
     return(
         <div className="header">
@@ -23,13 +20,14 @@ const Header=()=>{
             <div className="nav-items">
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="./About">About Us</Link></li>
-                    <li><Link to="./Contact">Contact Us</Link></li>
+                    <li><Link to="/About">About Us</Link></li>
+                    <li><Link to="/Contact">Contact Us</Link></li>
+                    <li><Link to="/Instamart">Instamart</Link></li>
                     <li>Cart</li>
                 </ul>
             </div>
             <div> {
-                isLoggedIn ? <button className="login-btn" onClick={()=>setIsLoggedIn(false)}>Logout</button> : <button className="login-btn" onClick={() => setIsLoggedIn(true)}>Login</button>}
+                isLoggedIn ? <button className="login-btn" onClick={()=>logout()}>Logout</button> : <button className="login-btn" onClick={()=>login()}>Login</button>}
             </div>
         </div>
     )

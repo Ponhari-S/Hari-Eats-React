@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 import { FETCH_MENU_URL } from "../config";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 const Body=()=>{
     const [searchText, setSearchText] = useState("");
@@ -19,6 +20,12 @@ async function getRestaurants(){
     const json = await data.json();
     setAllrestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+}
+
+const isOnline=useOnline();
+
+if(!isOnline){
+    return <h1>Offline, Please check your internet connection</h1>
 }
 
 return (allRestaurants.length === 0) ? <Shimmer/> : (
