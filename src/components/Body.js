@@ -30,15 +30,15 @@ if(!isOnline){
 
 return (allRestaurants.length === 0) ? <Shimmer/> : (
         <>
-        <div className="search">
-            <input type="text" className="search-input" placeholder="Search for restaurants and food" value={searchText} onChange={(e)=>{
+        <div className="flex justify-center my-5 mx-0">
+            <input type="text" className="w-75 p-2.5 border border-[#ddd] rounded-l-sm outline-none" placeholder="Search for restaurants and food" value={searchText} onChange={(e)=>{
                 setSearchText(e.target.value);
             }} />
-            <button className="search-btn" onClick={()=>{
+            <button className="py-2.5 px-5 border-none bg-[#267919] text-white rounded-r-sm cursor-pointer hover:bg-[#1b5613]" onClick={()=>{
                 setRestaurants(filterData(searchText, allRestaurants))
                 }}>Search</button>
         </div>
-        <div className="body">
+        <div className="flex flex-wrap justify-center">
             {
                 restaurants.length === 0 ? <h1>No restaurant found</h1> :
                 restaurants.map((restaurant,index)=>{
