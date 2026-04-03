@@ -1,8 +1,51 @@
+import { useState } from "react";
+
+const Section=({title, description, isVisible, setIsVisible})=>{
+    return(
+        <div className="border border-[#ddd] p-5 m-5"> 
+            <h1 className="text-2xl font-bold">{title}</h1>
+            {
+                isVisible ? <button className="py-2.5 px-5 border-none bg-[#267919] text-white rounded-sm cursor-pointer hover:bg-[#1b5613]" onClick={()=>setIsVisible(false)}>Hide</button> : <button className="py-2.5 px-5 border-none bg-[#267919] text-white rounded-sm cursor-pointer hover:bg-[#1b5613]" onClick={()=>setIsVisible(true)}>Show</button>
+            }
+            {isVisible && <p className="mt-5">{description}</p>}
+        </div>
+    )
+}
+
 const Instamart =()=>{
+
+    const [visibleSection, setVisibleSection] = useState("about");
+    const setIsVisible=(section)=>{
+        setVisibleSection(section);
+    }
+
+    const isVisible=(section)=>{
+        return visibleSection === section;
+    }
+
+    const sections=[
+        {
+            id:"about",
+            title:"About Instamart",
+            description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."
+        },
+        {
+            id:"team",
+            title:"Team Instamart",
+            description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."
+        },
+        {
+            id:"careers",
+            title:"Careers",
+            description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."
+        }
+    ]
+
     return(
         <div>
-            <h1>Instamart</h1>
-            <p>Instamart is a food delivery service that allows you to order food from your favorite restaurants and have it delivered to your doorstep. With Instamart, you can enjoy a wide variety of cuisines from the comfort of your own home. Whether you're craving pizza, sushi, or a healthy salad, Instamart has got you covered. Simply browse through the available restaurants, select your desired dishes, and place your order. Instamart will take care of the rest, ensuring that your food arrives hot and fresh in no time. So why wait? Start using Instamart today and satisfy your hunger with just a few clicks!</p>
+            <Section title={"About Instamart"} description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."} isVisible={true} setIsVisible={()=>{}} />
+            <Section title={"Team Instamart"} description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."} isVisible={false} setIsVisible={()=>{}} />
+            <Section title={"Careers"} description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque."} isVisible={false} setIsVisible={()=>{}} />    
         </div>
     )
 }
