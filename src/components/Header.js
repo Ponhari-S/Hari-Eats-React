@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom"
 import useAuth from "../utils/useAuth";
+import UserContact from "../utils/UserContact";
 
 const Title=()=>{
     return(
@@ -14,6 +15,8 @@ const Header=()=>{
 
     const { isLoggedIn,setIsLoggedIn, login, logout } = useAuth();
 
+    const {user} = useContext(UserContact);
+
     return(
         <div className="flex justify-between items-center py-2.5 px-5 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
             <Title />
@@ -26,6 +29,7 @@ const Header=()=>{
                     <li>Cart</li>
                 </ul>
             </div>
+            <h1 className="text-red-600 font-bold">{user.name}</h1>
             <div> {
                 isLoggedIn ? <button className="py-2.5 px-5 border-none bg-[#267919] text-white rounded-sm cursor-pointer hover:bg-[#1b5613]" onClick={()=>logout()}>Logout</button> : <button className="py-2.5 px-5 border-none bg-[#267919] text-white rounded-sm cursor-pointer hover:bg-[#1b5613]" onClick={()=>login()}>Login</button>}
             </div>

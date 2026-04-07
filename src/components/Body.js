@@ -47,6 +47,7 @@ return (allRestaurants.length === 0) ? <Shimmer/> : (
                 })
             }
         </div>
+        <div className="h-20"></div>
         </>
     )
 }
