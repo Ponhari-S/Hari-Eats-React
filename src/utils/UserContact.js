@@ -7,4 +7,6 @@ const UserContact = createContext({
     }
 })
 
+UserContact.displayName = "UserContact";
+
 export default UserContact;
