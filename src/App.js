@@ -11,6 +11,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
 import userContext from "./utils/UserContact.js";
+import { Provider } from "react-redux";
+import store from "./utils/Store.js";
 
 const root=ReactDOM.createRoot(document.getElementById("root"));
 
@@ -24,7 +26,7 @@ const AppLayout=()=>{
     })
 
     return(
-        <>
+        <Provider store={store}>
         <userContext.Provider value={
             {
                 user:user,
@@ -35,7 +37,7 @@ const AppLayout=()=>{
         <Outlet />
         <Footer />
         </userContext.Provider>
-        </>
+        </Provider>
     )
 }
 
