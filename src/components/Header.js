@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom"
 import useAuth from "../utils/useAuth";
 import UserContact from "../utils/UserContact";
+import store from "../utils/Store";
+import { useSelector } from "react-redux";
 
 const Title=()=>{
     return(
@@ -12,6 +14,8 @@ const Title=()=>{
 }
 
 const Header=()=>{
+
+    const cart=useSelector((store)=>store.cart.items);
 
     const { isLoggedIn,setIsLoggedIn, login, logout } = useAuth();
 
@@ -26,7 +30,7 @@ const Header=()=>{
                     <li><Link to="/About">About Us</Link></li>
                     <li><Link to="/Contact">Contact Us</Link></li>
                     <li><Link to="/Instamart">Instamart</Link></li>
-                    <li>Cart</li>
+                    <li>Cart-{cart.length}</li>
                 </ul>
             </div>
             <h1 className="text-red-600 font-bold">{user.name}</h1>
