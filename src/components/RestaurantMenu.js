@@ -29,14 +29,13 @@ const RestaurantMenu = () => {
   
     const restaurantInfo = useRest(id);
     const menuItems = useRestMenu(id);
-
-    if (!restaurantInfo) return <Shimmer />;
-
     const dispatch=useDispatch();
 
-    const handleChanges=()=>{
-      dispatch(addToCart("Added Item"));
+    const handleChanges=(item)=>{
+      dispatch(addToCart(item));
     }
+
+    if (!restaurantInfo) return <Shimmer />;
 
   return (
     <div className="p-5 max-w-200">
@@ -45,20 +44,15 @@ const RestaurantMenu = () => {
 
       <h3>{restaurantInfo.cuisines.join(", ")}</h3>
 
-      <div>
-        <button className="p-2 m-2 w-40 bg-green-200 rounded-4xl hover:bg-green-500" onClick={()=> handleChanges()}>Add</button>
-      </div>
-
       <p>{restaurantInfo.costForTwoMessage}</p>
 
       <ul>
         {menuItems.map((item) => (
           <li key={item.id}>
-            {item.name} - ₹{item.price}
+            {item.name} - ₹{item.price} - <button className="p-1 bg-green-100 rounded-xl" onClick={()=> handleChanges(item)}>Add</button>
           </li>
         ))}
       </ul>
-
     </div>
   );
 }

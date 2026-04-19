@@ -13,6 +13,7 @@ import Shimmer from "./components/Shimmer";
 import userContext from "./utils/UserContact.js";
 import { Provider } from "react-redux";
 import store from "./utils/Store.js";
+import Cart from "./components/Cart.js";
 
 const root=ReactDOM.createRoot(document.getElementById("root"));
 
@@ -74,6 +75,10 @@ const appRouter=createBrowserRouter([
                 element:<Suspense fallback={<Shimmer />}>
                     <Instamart />
                     </Suspense>
+            },
+            {
+                path:"/cart",
+                element:<Cart />
             }
         ]
     }
