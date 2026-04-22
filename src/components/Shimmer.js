@@ -1,7 +1,7 @@
 const Shimmer = () => {
   return (
     <>
-    <div className="w-100 h-10 my-5 mx-auto rounded-lg bg-linear-to-r from-[#eeeeee] via-[#dddddd] to-[#eeeeee] bg-size-[200%_100%] animate-shimmer"></div>
+    <div data-testid="shimmer" className="w-100 h-10 my-5 mx-auto rounded-lg bg-linear-to-r from-[#eeeeee] via-[#dddddd] to-[#eeeeee] bg-size-[200%_100%] animate-shimmer"></div>
     <div className="flex flex-wrap justify-center">
       {Array(8)
         .fill("")

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Title=()=>{
     return(
         <a className="no-underline text-inherit" href="/">
-            <img className="w-25 h-25" src="https://img.freepik.com/premium-vector/healthy-food-logo_476121-95.jpg?semt=ais_hybrid" alt="logo" />
+            <img data-testid="logo" className="w-25 h-25" src="https://img.freepik.com/premium-vector/healthy-food-logo_476121-95.jpg?semt=ais_hybrid" alt="logo" />
         </a>
     )
 }
@@ -30,7 +30,7 @@ const Header=()=>{
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/contact">Contact Us</Link></li>
                     <li><Link to="/instamart">Instamart</Link></li>
-                    <li><Link to="/cart">Cart-{cart.length}</Link></li>
+                    <li><Link to="/cart" data-testid="cart">Cart-{cart.length}</Link></li>
                 </ul>
             </div>
             <h1 className="text-red-600 font-bold">{user.name}</h1>
