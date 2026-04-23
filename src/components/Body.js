@@ -38,7 +38,7 @@ return (allRestaurants.length === 0) ? <Shimmer/> : (
                 setRestaurants(filterData(searchText, allRestaurants))
                 }}>Search</button>
         </div>
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center" data-testid="restaurant-list">
             {
                 restaurants.length === 0 ? <h1>No restaurant found</h1> :
                 restaurants.map((restaurant,index)=>{

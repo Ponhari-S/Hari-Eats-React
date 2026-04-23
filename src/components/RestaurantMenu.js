@@ -38,7 +38,7 @@ const RestaurantMenu = () => {
     if (!restaurantInfo) return <Shimmer />;
 
   return (
-    <div className="p-5 max-w-200">
+    <div className="p-5 max-w-200"data-testid="restaurant-menu">
 
       <h1>{restaurantInfo.name}</h1>
 
